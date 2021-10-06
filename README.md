@@ -1,4 +1,48 @@
+![alt text](https://i.imgur.com/1MgZ54L.png)
+
 # CarGurus-Git-
+CarGurus-Git is a car listing bot powered by python. It
+stores a CarGurus link which is readily accessible to
+be filtered and gives end-user a real time listing via SMS
+using the Twilio API.
+
+
+# Usage
+
+## Installation Option for required packages
+  1. Run the pipInstall.py file for required python packages
+  1. Pip install the following
+     1. BeautifulSoup
+     2. requests
+     3. mysql.connector
+     4. twilio.rest
+     5. flask
+     6. twilio.twiml.messaging_response
+     7. twilio.rest
+
+
+## How to use :
+1. Send any text to the Twilio number
+    1. ![alt text](https://i.imgur.com/JqN5Z46.gif)
+1. Type 'instructions' for a list of what to do
+    1. <img src="https://i.imgur.com/hD0D97g.png" width="30%" height="30%">
+1. After following the instructions, respond with '2'.
+1. Go ahead and follow these steps:
+    1. ![image](https://i.imgur.com/GhZD8qE.png)
+1. Select whatever option you want!:
+    1. ![image](https://i.imgur.com/A9QYrfv.png)
+1. These are examples of the options:
+    1. ![image](https://i.imgur.com/rZOk6pY.png)
+
+
+
+
+
+
+
+
+# --------EXTRAS---------
+## Why was it built?
 I created this CarGurus tool to make car buying just a little easier.
 I was looking for a car from the beginning of this year and was honestly 
 tired of always having to manually check the CarGurus websites for any new updates.
@@ -7,7 +51,7 @@ having to open the website and save all the different links. I wanted
 to create a program where you only have to enter the link of the type of car
 you want once and never have to enter it again.
 
-# How was it built?
+## How was it built?
 One of the first problems I was facing was making the program fast enough
 to get the responses from the website, and I was deciding between
 Selenium and BeautifulSoup4. Ultimately BS4 was faster as it did not
@@ -30,3 +74,5 @@ Last thing needed was a way to run the program 24/7 and my solution was a
 Raspberry Pi, its cost-effective and performs great. I utilized ngrok tunnels
 to allow listenting to the Twilio server and allow back and forth communication
 with the program.
+
+
