@@ -6,6 +6,11 @@ stores a CarGurus link which is readily accessible to
 be filtered and gives end-user a real time listing via SMS
 using the Twilio API.
 
+# FUTURE PLANS:
+
+1.Allow user to opt in for daily text messages of the best deal that day according to their link.
+    1. Will be done by adding another column to database for user optIn.
+    1. Will use Cron for scheduling the text messages.
 
 # Usage
 
