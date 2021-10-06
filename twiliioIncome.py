@@ -13,9 +13,13 @@ app = Flask(__name__)
 def sms_reply():
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
+    #EXTRACTS THE USERS PHONE NUMBER AND BODY TO RETURN TO SAME
+    #PHONE AND TO CHECK THE CONDITIONAL STATEMENTS
+    #IN THE TEXTMESSAGEMAKE.PY FILE
     number = request.values.get('From')
     resp = MessagingResponse()
     body = body.lower().replace(" ", '')
+
     classText = textMessageMake.CarMessage(number, body)
     textMessage = classText.mainFunction()
     resp.message(textMessage)

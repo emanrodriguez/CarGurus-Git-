@@ -37,15 +37,6 @@ class CarMessage:
                f"   3. Lowest Mileage"
         return menu
 
-    def currentMenu(self):
-        if self.menuChoice == '':
-            curr = self.mainMenu()
-        elif self.menuChoice == '1':
-            curr = self.subMenu()
-        elif self.menuChoice == '2':
-            curr = self.menuOptionTwo()
-        return curr
-
     def instructions(self):
         self.textMessage += f"1. For the link please go to cargurus.com " \
                             f"on your mobile/pc device.\n\n" \
@@ -56,6 +47,20 @@ class CarMessage:
                             f"5. Copy and paste that link when asked.\n\n" \
                             f"{self.currentMenu()}"
 
+    def invalidOption(self):
+        self.textMessage += f"You have entered an invalid option.\n\n{self.currentMenu()}"
+        return self.textMessage
+
+    def currentMenu(self):
+        if self.menuChoice == '':
+            curr = self.mainMenu()
+        elif self.menuChoice == '1':
+            curr = self.subMenu()
+        elif self.menuChoice == '2':
+            curr = self.menuOptionTwo()
+        return curr
+
+    # USED IF USER WANTS TO RESET THE CARLINK
     def resetValues(self):
         self.menuChoice = ""
         sqlDatabase.replaceChoice('', 'menuchoice', self.phoneNumber)
@@ -66,6 +71,7 @@ class CarMessage:
                             f"{self.currentMenu()}"
         return
 
+    # CHECKS IF USER INPUTTED LINK IS VALID
     def validUrl(self):
         if 'https' and 'showNego' in self.body:
             startUrl, endUrl = carWebsite.stripUrl(self.body)
@@ -76,13 +82,9 @@ class CarMessage:
             self.textMessage += "The link you entered was invalid, try again..\n\n"
             return False
 
-    def invalidOption(self):
-        self.textMessage += f"You have entered an invalid option.\n\n{self.currentMenu()}"
-        return self.textMessage
-
     def mainFunction(self):
         lowerBody = self.body.lower()
-        # -----------------Checks if user is new ------------------------#
+        # ----------------- CHECKS IF USER IS NEW------------------------#
         phoneValid = sqlDatabase.checkValid(self.phoneNumber)
         if phoneValid is True:
             self.textMessage += 'Welcome to the CarGurus Bot\n\n' \
@@ -90,7 +92,7 @@ class CarMessage:
                                 'how the program works!\n\n'
             self.textMessage += self.mainMenu()
             return self.textMessage
-        # ---------------------------------------------------------------#
+        # ---------------CHECKS IF USER INPUT IS ONE OF THE STATIC STATEMENT OPTIONS--------------------------#
         if lowerBody in ['instructions', 'help', 'reset']:
             if lowerBody in 'instructions':
                 self.instructions()
@@ -121,7 +123,7 @@ class CarMessage:
                                     "Just remember if you're having trouble " \
                                     "just reply with 'instructions'."
                 return self.textMessage
-        # -----------------------------------------------------------------------#
+        # ----------------------THIS IF STATEMENT IS USED FOR OPTION ONE-----------------------------#
         if self.menuChoice == '1':
             if self.emptyUrl == '':
                 if self.validUrl():
@@ -145,7 +147,7 @@ class CarMessage:
                     endURL = sqlDatabase.fetchChoice(self.phoneNumber, 'endurl')
                     self.textMessage += f"{carWebsite.runAll(self.body, startURL, endURL)}\n\n" \
                                         f"Would you like to select another option?"
-        # ---------------------------------------------------------------------------------------------#
+        # ----------------------------IF STATEMENT IS USED FOR OPTION TWO---------------------------------------#
         elif self.menuChoice == '2':
             if self.validUrl():
                 self.textMessage += f"\n You're all set, sending you back to main menu...\n\n"
