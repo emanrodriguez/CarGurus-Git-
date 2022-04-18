@@ -1,30 +1,44 @@
-#THIS FILE IS ONLY IF YOU WANT TO USE YOUR OWN DATABASE
-#USES PRE-MADE STATEMENTS TO INSERT OR GET VALUES FROM SQLDATABASE
+# THIS FILE IS ONLY IF YOU WANT TO USE YOUR OWN DATABASE
+# USES PRE-MADE STATEMENTS TO INSERT OR GET VALUES FROM SQLDATABASE
 import mysql.connector
 from twilio.rest import Client
 
-account_sid = '###REPLACE WITH YOUR SID###'
-auth_token = '###REPLACE WITH YOUR AUTHTOKEN###'
+account_sid = '<ReplaceWithYourAcctSID>'
+auth_token = '<ReplaceWithYourAuthToken'
 client = Client(account_sid, auth_token)
 
+# mydb = mysql.connector.connect(
+#     host="",
+#     port="",
+#     user="",
+#     password="!",
+#     database="")
+# cursor = mydb.cursor()
+
 mydb = mysql.connector.connect(
-    host="",
-    port="",
-    user="",
-    password="",
-    database="")
+    host="5.161.51.22",
+    port="3306",
+    user="logicamHome",
+    password="Sharpieboy265!",
+    database="cargurus_script")
 cursor = mydb.cursor()
 
 
 def checkRow():
-    rowCheck = f"SELECT * FROM CLIENTS"
+    rowCheck = f"SELECT * FROM USERS"
     cursor.execute(rowCheck)
+    fetchedValue = ''
+    rowList = []
     for i in cursor:
-        print(i)
+        originalValue = str(i)
+        fetchedValue: str = originalValue.replace('(', '').replace('+', '').replace(')', "").replace('', "").replace(
+            '"', "").replace("'", '')
+        rowList.append(fetchedValue)
+    return rowList
 
 
 def checkValid(phoneNumber):
-    doesExist = f"SELECT MENUCHOICE FROM CLIENTS WHERE PHONENUMBER= {phoneNumber}"
+    doesExist = f"SELECT MENUCHOICE FROM USERS WHERE PHONENUMBER= {phoneNumber}"
     cursor.execute(doesExist)
     rowExists = cursor.fetchone()
     if rowExists is None:
@@ -38,14 +52,14 @@ def checkValid(phoneNumber):
 
 
 def insertClient(phoneNumber):
-    addQuery = f"insert ignore into CLIENTS (phonenumber) values({phoneNumber})"
+    addQuery = f"insert ignore into USERS (phonenumber) values({phoneNumber})"
     cursor.execute(addQuery)
     mydb.commit()
     return
 
 
 def fetchChoice(phoneNumber, columnName):
-    addQuery = f"select {columnName} from CLIENTS where phonenumber={phoneNumber}"
+    addQuery = f"select {columnName} from USERS where phonenumber={phoneNumber}"
     cursor.execute(addQuery)
     fetchedValue = ''
     for i in cursor:
@@ -57,9 +71,9 @@ def fetchChoice(phoneNumber, columnName):
 
 def fetchValue(phoneNumber, columnType):
     if columnType == 'MENUCHOICE':
-        addQuery = f"select MENUCHOICE from CLIENTS where phonenumber={phoneNumber}"
+        addQuery = f"select MENUCHOICE from USERS where phonenumber={phoneNumber}"
     elif columnType == 'SUBMENUCHOICE':
-        addQuery = f"select SUBMENUCHOICE from CLIENTS where phonenumber={phoneNumber}"
+        addQuery = f"select SUBMENUCHOICE from USERS where phonenumber={phoneNumber}"
     cursor.execute(addQuery)
     fetchedValue = ''
     for i in cursor:
@@ -76,7 +90,7 @@ def replaceValue(phonenumber, value):
 
 
 def dailyTasks():
-    addQuery = f"SELECT PHONENUMBER,CARLINK FROM CLIENTS WHERE CARLINK!=''"
+    addQuery = f"SELECT PHONENUMBER,CARLINK FROM USERS WHERE CARLINK!=''"
     cursor.execute(addQuery)
     test = []
     for i in cursor:
@@ -88,32 +102,43 @@ def dailyTasks():
 
 
 def replaceAll(phonenumber):
-    replaceQuery = f"UPDATE CLIENTS SET MENUCHOICE='0',SUBMENUCHOICE='0' WHERE phonenumber={phonenumber}"
+    replaceQuery = f"UPDATE USERS SET MENUCHOICE='0',SUBMENUCHOICE='0' WHERE phonenumber={phonenumber}"
     cursor.execute(replaceQuery)
     mydb.commit()
 
 
 def replaceChoice(value, column, number):
-    replaceMenuChoice = f"UPDATE CLIENTS SET {column}='{value}' WHERE PHONENUMBER={number}"
+    replaceMenuChoice = f"UPDATE USERS SET {column}='{value}' WHERE PHONENUMBER={number}"
     cursor.execute(replaceMenuChoice)
     mydb.commit()
 
 
+def customQuery(query):
+    cursor.execute(query)
+    fetchedValue = ''
+    rowList = []
+    for i in cursor:
+        originalValue = str(i)
+        fetchedValue: str = originalValue.replace('(', '').replace('+', '').replace(')', "").replace('', "").replace(
+            '"', "").replace("'", '')
+        rowList.append(fetchedValue)
+    return rowList
+
+
 def resetValues(NUMBER):
-    replaceMenuChoice = f"UPDATE CLIENTS SET MENUCHOICE='' WHERE PHONENUMBER={NUMBER}"
+    replaceMenuChoice = f"UPDATE USERS SET MENUCHOICE='' WHERE PHONENUMBER={NUMBER}"
     cursor.execute(replaceMenuChoice)
-    replaceMenuChoice = f"UPDATE CLIENTS SET SUBMENUCHOICE='' WHERE PHONENUMBER={NUMBER}"
+    replaceMenuChoice = f"UPDATE USERS SET SUBMENUCHOICE='' WHERE PHONENUMBER={NUMBER}"
     cursor.execute(replaceMenuChoice)
-    replaceMenuChoice = f"UPDATE CLIENTS SET STARTURL='' WHERE PHONENUMBER={NUMBER}"
+    replaceMenuChoice = f"UPDATE USERS SET STARTURL='' WHERE PHONENUMBER={NUMBER}"
     cursor.execute(replaceMenuChoice)
-    replaceMenuChoice = f"UPDATE CLIENTS SET ENDURL='' WHERE PHONENUMBER={NUMBER}"
+    replaceMenuChoice = f"UPDATE USERS SET ENDURL='' WHERE PHONENUMBER={NUMBER}"
     cursor.execute(replaceMenuChoice)
     mydb.commit()
 
 
 def deleteAll():
     checkRow()
-    deleteAllQuery = f"TRUNCATE TABLE CLIENTS"
+    deleteAllQuery = f"TRUNCATE TABLE USERS"
     cursor.execute(deleteAllQuery)
     mydb.commit()
-
