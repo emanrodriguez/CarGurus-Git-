@@ -15,14 +15,6 @@ client = Client(account_sid, auth_token)
 #     database="")
 # cursor = mydb.cursor()
 
-mydb = mysql.connector.connect(
-    host="5.161.51.22",
-    port="3306",
-    user="logicamHome",
-    password="Sharpieboy265!",
-    database="cargurus_script")
-cursor = mydb.cursor()
-
 
 def checkRow():
     rowCheck = f"SELECT * FROM USERS"
