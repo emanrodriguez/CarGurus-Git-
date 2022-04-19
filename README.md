@@ -6,7 +6,7 @@ stores a CarGurus link which is readily accessible to
 be filtered and gives end-user a real time listing via SMS
 using the Twilio API.
 
-#Test it yourself by texting "CarGurus" +1(714)360-0976
+# Test it yourself by texting "CarGurus" +1(714)360-0976
 
 
 # FUTURE PLANS:
