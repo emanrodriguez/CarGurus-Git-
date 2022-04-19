@@ -164,11 +164,11 @@ class CarMessage:
                         self.resetValues()
                 else:
                     print("In here")
-                    self.textMessage += "Invalid choice, please choose one of the following bitch" + self.currentMenu()
+                    self.textMessage += "Invalid choice, please choose one of the following" + self.currentMenu()
             else:
                 if self.body not in ['1', '2', '3'] and not self.validUrl():
                     print("In here")
-                    self.textMessage += "Invalid choice, please choose one of the following slot" + self.currentMenu()
+                    self.textMessage += "Invalid choice, please choose one of the following" + self.currentMenu()
                 else:
                     if self.emptyUrl != "":
                         sqlDatabase.replaceChoice(self.body, 'submenuchoice', self.phoneNumber)
