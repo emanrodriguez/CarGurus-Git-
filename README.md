@@ -6,6 +6,9 @@ stores a CarGurus link which is readily accessible to
 be filtered and gives end-user a real time listing via SMS
 using the Twilio API.
 
+#Test it yourself by texting "CarGurus" +1(714)360-0976
+
+
 # FUTURE PLANS:
 
 1.Allow user to opt in for daily text messages of the best deal that day according to their link.
@@ -13,7 +16,6 @@ using the Twilio API.
     1. Will use Cron for scheduling the text messages.
 
 # Usage
-##Test it yourself by texting "CarGurus" +1(714)360-0976
 ## Installation Option for required packages
   1. Run the pipInstall.py file for required python packages
   1. Pip install the following
