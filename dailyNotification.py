@@ -13,8 +13,8 @@ def sendMessage(phonenumber, string):
     )
 
 
-account_sid = 'ACc9fd4c22cd5a9edad5deaf14ae4d6086'
-auth_token = '910df4d587249ae2d5be6ea1cfb58e76'
+account_sid = '<>'
+auth_token = '<>'
 client = Client(account_sid, auth_token)
 # tempList = sqlDatabase.customQuery("SELECT * FROM USERS WHERE STARTURL IS NOT NULL AND TRIM(STARTURL) <> '' ")
 tempList = sqlDatabase.customQuery("SELECT * FROM USERS WHERE DAILYNOTIFICATION IS NOT NULL AND TRIM(STARTURL) <> '' ")
