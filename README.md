@@ -79,8 +79,8 @@ capacity. By trial and error I could find the the users phone number and
 body text and using it for the instance of the class.
 
 Last thing needed was a way to run the program 24/7 and my solution was a
-Raspberry Pi, its cost-effective and performs great. I utilized ngrok tunnels
-to allow listenting to the Twilio server and allow back and forth communication
+remote server, its low-cost($25/m) and is located in Ashburn, VA for the fastest connection. 
+I utilized ngrok tunnels to allow listenting to the Twilio server and allow back and forth communication
 with the program.
 
 
