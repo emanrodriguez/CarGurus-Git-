@@ -61,19 +61,20 @@ you want once and never have to enter it again.
 ## How was it built?
 One of the first problems I was facing was making the program fast enough
 to get the responses from the website, and I was deciding between
-Selenium and BeautifulSoup4. Ultimately BS4 was faster as it did not
-have to load the javascript from the website. Making runtime a little faster.
+using a Selenium or a Requests based approach.
+I ended up using requests as Javascript did not affect the results
+from the website. Making runtime faster.
 
 Now that that was done I needed to implement a way to be able to get user input
 in order to filter the links as the user wanted (Lowest Priced, Newest Listing, etc.).
-This was solved by using a database using the MariaDB software.
+This was solved by using a database using a MySQL database.
 
-Next was tracking user options and the database was able to solve this problem
-by creating an instance of a class by using the users phonenumber. It was able to
-track the previous menu option and current option.
+Next was tracking user options and the more obvious approach was using a database.
+When a user sends a text it will use a phone number the text was sent from as the
+key, checking and retrieving values.
 
 Now I needed a way to have the user communicate with the system. For this
-I used Twilio's API because it is a low-cost solution with amazing
+I used Twilio's API because it is a low-cost(.02 cents/text). solution with amazing
 capacity. By trial and error I could find the the users phone number and
 body text and using it for the instance of the class.
 
