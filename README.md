@@ -12,8 +12,8 @@ using the Twilio API.
 # FUTURE PLANS:
 
 1.Allow user to opt in for daily text messages of the best deal that day according to their link.
-    1. Will be done by adding another column to database for user optIn.
-    1. Will use Cron for scheduling the text messages.
+    1. Will be done by adding another column to database for user optIn.(Complete)
+    1. Will use Cron for scheduling the text messages.(Complete)
 
 # Usage
 ## Installation Option for required packages
